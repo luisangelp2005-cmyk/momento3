@@ -79,8 +79,8 @@ if selected == "Predicción Individual":
             vivienda = st.selectbox("¿Tiene Hipoteca?", ["yes", "no"])
             duracion = st.number_input("Duración contacto (seg)", value=200)
             tipo_modelo = st.radio("Modelo", ["Regresión Logística", "Red Neuronal (MLP)"])
-
-        if st.button("Generar Diagnóstico Real"):
+            
+if st.button("Generar Diagnóstico Real"):
             input_dict = {'age': edad, 'balance': balance, 'duration': duracion, 
                           'job': trabajo, 'housing': vivienda}
             df_input = pd.DataFrame([input_dict])
@@ -91,8 +91,8 @@ if selected == "Predicción Individual":
             pred = modelo_actual.predict(X_input)[0]
             prob = modelo_actual.predict_proba(X_input)[0][1] * 100
 
-st.markdown('<div class="res-container">', unsafe_allow_html=True)
-            # --- NUEVA LÓGICA DE RESULTADOS ---
+            st.markdown('<div class="res-container">', unsafe_allow_html=True)
+            
             if prob >= 50:
                 st.subheader("Resultado: INTERESADO")
                 st.write(f"Confianza del Modelo: **{prob:.2f}%**")
@@ -101,6 +101,7 @@ st.markdown('<div class="res-container">', unsafe_allow_html=True)
                 st.subheader("Resultado: NO INTERESADO")
                 st.write(f"Confianza del Modelo: **{prob:.2f}%**")
                 st.error("❌ Baja probabilidad de éxito comercial.")
+                
             st.markdown('</div>', unsafe_allow_html=True)
           
 
