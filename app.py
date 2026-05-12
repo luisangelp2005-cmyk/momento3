@@ -70,7 +70,7 @@ if selected == "Predicción Individual":
     if mod_ann is None:
         st.warning("El modelo no está listo. Ejecuta el entrenamiento.")
     else:
-        col1, col2 = st.columns(2)
+   col1, col2 = st.columns(2)
         with col1:
             edad = st.number_input("Edad", 18, 100, 30)
             trabajo = st.selectbox("Ocupación", ["admin.", "technician", "blue-collar", "management", "retired", "services"])
@@ -78,7 +78,7 @@ if selected == "Predicción Individual":
         with col2:
             vivienda = st.selectbox("¿Tiene Hipoteca?", ["yes", "no"])
             duracion = st.number_input("Duración de llamada(seg)", value=200)
-   tipo_modelo = st.radio("Modelo", ["Regresión Logística", "Red Neuronal (MLP)"])
+            tipo_modelo = st.radio("Modelo", ["Regresión Logística", "Red Neuronal (MLP)"])
 
         if st.button("Generar Diagnóstico Real"):
             input_dict = {'age': edad, 'balance': balance, 'duration': duracion, 
@@ -104,7 +104,6 @@ if selected == "Predicción Individual":
                 
             st.markdown('</div>', unsafe_allow_html=True)
           
-
 elif selected == "Análisis por Lotes":
     st.header("Carga Masiva de Datos")
     archivo = st.file_uploader("Sube bank-full.csv", type=["csv"])
