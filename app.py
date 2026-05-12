@@ -69,40 +69,43 @@ if selected == "Predicción Individual":
     
     if mod_ann is None:
         st.warning("El modelo no está listo. Ejecuta el entrenamiento.")
-    else:
-   col1, col2 = st.columns(2)
-        with col1:
-            edad = st.number_input("Edad", 18, 100, 30)
-            trabajo = st.selectbox("Ocupación", ["admin.", "technician", "blue-collar", "management", "retired", "services"])
-            balance = st.number_input("Saldo anual (Balance)", value=1500)
-        with col2:
-            vivienda = st.selectbox("¿Tiene Hipoteca?", ["yes", "no"])
-            duracion = st.number_input("Duración de llamada(seg)", value=200)
-            tipo_modelo = st.radio("Modelo", ["Regresión Logística", "Red Neuronal (MLP)"])
+  else:
+            col1, col2 = st.columns(2)
+            with col1:
+                edad = st.number_input("Edad", 18, 100, 30)
+                trabajo = st.selectbox("Ocupación", ["admin.", "technician", "blue-collar", "management", "retired", "services"])
+                balance = st.number_input("Saldo anual (Balance)", value=1500)
+            with col2:
+                vivienda = st.selectbox("¿Tiene Hipoteca?", ["yes", "no"])
+                duracion = st.number_input("Duración de llamada(seg)", value=200)
+                tipo_modelo = st.radio("Modelo", ["Regresión Logística", "Red Neuronal (MLP)"])
 
-        if st.button("Generar Diagnóstico Real"):
-            input_dict = {'age': edad, 'balance': balance, 'duration': duracion, 
-                          'job': trabajo, 'housing': vivienda}
-            df_input = pd.DataFrame([input_dict])
-            df_input = pd.get_dummies(df_input).reindex(columns=cols_entrenamiento, fill_value=0)
-            X_input = sc.transform(df_input)
+            # Este botón ahora está dentro del 'else' de Predicción Individual
+            if st.button("Generar Diagnóstico Real"):
+                input_dict = {'age': edad, 'balance': balance, 'duration': duracion, 
+                              'job': trabajo, 'housing': vivienda}
+                df_input = pd.DataFrame([input_dict])
+                df_input = pd.get_dummies(df_input).reindex(columns=cols_entrenamiento, fill_value=0)
+                X_input = sc.transform(df_input)
 
-            modelo_actual = mod_log if tipo_modelo == "Regresión Logística" else mod_ann
-            pred = modelo_actual.predict(X_input)[0]
-            prob = modelo_actual.predict_proba(X_input)[0][1] * 100
+                modelo_actual = mod_log if tipo_modelo == "Regresión Logística" else mod_ann
+                pred = modelo_actual.predict(X_input)[0]
+                prob = modelo_actual.predict_proba(X_input)[0][1] * 100
 
-            st.markdown('<div class="res-container">', unsafe_allow_html=True)
-            
-            if prob >= 50:
-                st.subheader("Resultado: INTERESADO")
-                st.write(f"Confianza del Modelo: **{prob:.2f}%**")
-                st.success("✅ Alta probabilidad de éxito comercial.")
-            else:
-                st.subheader("Resultado: NO INTERESADO")
-                st.write(f"Confianza del Modelo: **{prob:.2f}%**")
-                st.error("❌ Baja probabilidad de éxito comercial.")
+                st.markdown('<div class="res-container">', unsafe_allow_html=True)
                 
-            st.markdown('</div>', unsafe_allow_html=True)
+                if prob >= 50:
+                    st.subheader("Resultado: INTERESADO")
+                    st.write(f"Confianza del Modelo: **{prob:.2f}%**")
+                    st.success("✅ Alta probabilidad de éxito comercial.")
+                else:
+                    st.subheader("Resultado: NO INTERESADO")
+                    st.write(f"Confianza del Modelo: **{prob:.2f}%**")
+                    st.error("❌ Baja probabilidad de éxito comercial.")
+                    
+                st.markdown('</div>', unsafe_allow_html=True)
+
+# La línea 108 (elif selected == "Análisis por Lotes":) debe ir sin espacios al inicio
           
 elif selected == "Análisis por Lotes":
     st.header("Carga Masiva de Datos")
