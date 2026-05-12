@@ -81,7 +81,6 @@ if selected == "Predicción Individual":
    tipo_modelo = st.radio("Modelo", ["Regresión Logística", "Red Neuronal (MLP)"])
 
         if st.button("Generar Diagnóstico Real"):
-            
             input_dict = {'age': edad, 'balance': balance, 'duration': duracion, 
                           'job': trabajo, 'housing': vivienda}
             df_input = pd.DataFrame([input_dict])
