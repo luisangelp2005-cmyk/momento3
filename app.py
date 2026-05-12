@@ -104,9 +104,7 @@ if selected == "Predicción Individual":
                     st.error("❌ Baja probabilidad de éxito comercial.")
                     
                 st.markdown('</div>', unsafe_allow_html=True)
-
-# La línea 108 (elif selected == "Análisis por Lotes":) debe ir sin espacios al inicio
-          
+      
 elif selected == "Análisis por Lotes":
     st.header("Carga Masiva de Datos")
     archivo = st.file_uploader("Sube bank-full.csv", type=["csv"])
