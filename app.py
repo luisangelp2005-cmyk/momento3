@@ -91,7 +91,7 @@ if selected == "Predicción Individual":
             pred = modelo_actual.predict(X_input)[0]
             prob = modelo_actual.predict_proba(X_input)[0][1] * 100
 
-           st.markdown('<div class="res-container">', unsafe_allow_html=True)
+          st.markdown('<div class="res-container">', unsafe_allow_html=True)
             # --- NUEVA LÓGICA DE RESULTADOS ---
             if prob >= 50:
                 st.subheader("Resultado: INTERESADO")
