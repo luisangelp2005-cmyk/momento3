@@ -91,14 +91,18 @@ if selected == "Predicción Individual":
             pred = modelo_actual.predict(X_input)[0]
             prob = modelo_actual.predict_proba(X_input)[0][1] * 100
 
-            st.markdown('<div class="res-container">', unsafe_allow_html=True)
-            st.subheader(f"Resultado: {'SUSCRITO' if pred == 1 else 'NO INTERESADO'}")
-            st.metric("Confianza del Modelo", f"{prob:.2f}%")
-            if pred == 1:
-                st.success("El cliente es propenso a aceptar el depósito.")
+           st.markdown('<div class="res-container">', unsafe_allow_html=True)
+            # --- NUEVA LÓGICA DE RESULTADOS ---
+            if prob >= 50:
+                st.subheader("Resultado: INTERESADO")
+                st.write(f"Confianza del Modelo: **{prob:.2f}%**")
+                st.success("✅ Alta probabilidad de éxito comercial.")
             else:
-                st.error("Baja probabilidad de éxito comercial.")
+                st.subheader("Resultado: NO INTERESADO")
+                st.write(f"Confianza del Modelo: **{prob:.2f}%**")
+                st.error("❌ Baja probabilidad de éxito comercial.")      
             st.markdown('</div>', unsafe_allow_html=True)
+          
 
 elif selected == "Análisis por Lotes":
     st.header("Carga Masiva de Datos")
