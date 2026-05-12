@@ -79,8 +79,7 @@ if selected == "Predicción Individual":
             vivienda = st.selectbox("¿Tiene Hipoteca?", ["yes", "no"])
             duracion = st.number_input("Duración de contrato", value=200)
             tipo_modelo = st.radio("Modelo", ["Regresión Logística", "Red Neuronal (MLP)"])
-            
-if st.button("Generar Diagnóstico Real"):
+
             input_dict = {'age': edad, 'balance': balance, 'duration': duracion, 
                           'job': trabajo, 'housing': vivienda}
             df_input = pd.DataFrame([input_dict])
