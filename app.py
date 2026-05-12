@@ -77,7 +77,7 @@ if selected == "Predicción Individual":
             balance = st.number_input("Saldo anual (Balance)", value=1500)
         with col2:
             vivienda = st.selectbox("¿Tiene Hipoteca?", ["yes", "no"])
-            duracion = st.number_input("Duración de contrato", value=200)
+            duracion = st.number_input("Duración de llamada(seg)", value=200)
             tipo_modelo = st.radio("Modelo", ["Regresión Logística", "Red Neuronal (MLP)"])
   
 if st.button("Generar Diagnóstico Real"):
