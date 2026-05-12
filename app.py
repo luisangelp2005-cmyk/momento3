@@ -78,10 +78,10 @@ if selected == "Predicción Individual":
         with col2:
             vivienda = st.selectbox("¿Tiene Hipoteca?", ["yes", "no"])
             duracion = st.number_input("Duración de llamada(seg)", value=200)
-            tipo_modelo = st.radio("Modelo", ["Regresión Logística", "Red Neuronal (MLP)"])
-  
-if st.button("Generar Diagnóstico Real"):
-      
+   tipo_modelo = st.radio("Modelo", ["Regresión Logística", "Red Neuronal (MLP)"])
+
+        if st.button("Generar Diagnóstico Real"):
+            
             input_dict = {'age': edad, 'balance': balance, 'duration': duracion, 
                           'job': trabajo, 'housing': vivienda}
             df_input = pd.DataFrame([input_dict])
